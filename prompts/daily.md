@@ -39,7 +39,7 @@ If either is missing, exit non-zero with the message above. We can't notify Tele
 ## Step 1 — Load context
 
 Read `portfolio.json` from the repo root. It contains:
-- `holdings`: array with `name`, `ticker`, `units`, `cost_basis_gbp`, `currency_native`, `type`
+- `holdings`: array with `name`, `display_name` (optional, used for terse mobile labels), `ticker`, `units`, `cost_basis_gbp`, `currency_native`, `type`
 - `profile`: user context (age, horizon, risk tolerance, tax wrappers, goals, concerns)
 - `_meta`: schema metadata
 
@@ -155,17 +155,13 @@ Pick the **3 most material to the portfolio** — rank by impact on the user's �
 
 ## Step 6 — Compose the message
 
-Use this exact shape (Markdown, target ≤2500 chars, telegraphic tone):
+Use this exact shape (Markdown, target ≤2500 chars, telegraphic tone). **Inverted-pyramid order** — most actionable content first; reference data lower:
 
 ```
 📊 *Daily Briefing — <DD Mon YYYY>*
 
-*Portfolio: £<total, nearest £100>* (<weighted daily move>%)
-FTSE 100: <±x>%, S&P 500: <±y>% (last close), Nasdaq: <±z>% (last close)
-
-*Holdings*
-[Iterate `holdings` from portfolio.json sorted by **|daily_change_pct| descending** (movers first). Tie-break by `weight_pct` desc. One line per holding:]
-• <name>: <±x>% [4-6 word context tag if interesting; omit tag on quiet days]
+*Today's read*
+[Omit this entire section on truly quiet days — don't print a placeholder. Otherwise: one sentence, ≤20 words, the single most important thing.]
 
 ⚠️ *Anomalies*
 [Omit this entire section if there are zero anomalies. Otherwise:]
@@ -173,23 +169,32 @@ FTSE 100: <±x>%, S&P 500: <±y>% (last close), Nasdaq: <±z>% (last close)
 2. <one-line, with [domain — excerpt] citation>
 3. <one-line, with [domain — excerpt] citation>
 
-*Today's read*
-[Omit this entire section on truly quiet days — don't print a placeholder. Otherwise: one sentence, ≤20 words, the single most important thing.]
+*Portfolio: £<total, nearest £100>* (<weighted daily move>%)
+
+*Holdings*
+[Iterate `holdings` from portfolio.json sorted by **|daily_change_pct| descending** (movers first). Tie-break by `weight_pct` desc. One line per holding, **every line gets a colour circle**:]
+🟢 <display_name>: +<x>% [tag if interesting]   ← any positive move
+🔴 <display_name>: -<x>% [tag if interesting]   ← any negative move
+⚪ <display_name>: flat                          ← rounds to ±0.0% or no data
+
+FTSE 100: <±x>%, S&P 500: <±y>% (last close), Nasdaq: <±z>% (last close)
 
 _Signals only, not financial advice._
 
 · run <UTC ISO timestamp at message-compose time>
 ```
 
+Use `display_name` from `portfolio.json` for the holding label; fall back to `name` if `display_name` is missing.
+
 ### Style rules
 
 - 1 decimal place on % (`+2.3%`, not `+2.31%`).
 - For moves where rounded result is `±0.0%`, write `flat` instead.
 - £ totals to nearest £100.
-- No 🟢/🔴 per holding — sign is enough.
+- **Every holding line begins with a circle**: 🟢 for any positive move, 🔴 for any negative move, ⚪ for `flat` or no data. Replace the `•` bullet entirely.
 - Holding lines: just the % move on a quiet day. Add a **max 6-word** context tag only if the holding moved >±1.5%, has news, or hit a 52-week extreme. **No citations on holding lines** — citations live in *Anomalies* only.
 - The tag is a short descriptive phrase (`"new 52w high"`, `"Q2 outlook miss"`, `"AI capex tailwind"`, `"price as of 30 Apr"` for stale data) — never a sentence, never a headline.
-- **Dedup rule:** if a holding appears in *Anomalies*, the *Holdings* line shows just the % move with no tag. The anomaly already explains why; a tag would duplicate.
+- **Dedup rule:** if a holding appears in *Anomalies*, the *Holdings* line shows just the circle and % move with no tag. The anomaly already explains why; a tag would duplicate.
 - Inline citations on every news claim in *Anomalies*, e.g. `[ft.com — "headline excerpt"]`.
 
 ### Step 6.5 — Self-QA before sending

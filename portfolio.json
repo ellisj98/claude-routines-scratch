@@ -50,6 +50,7 @@
   "holdings": [
     {
       "name": "Shopify Inc",
+      "display_name": "Shopify",
       "ticker": "SHOP",
       "units": 458,
       "cost_basis_gbp": 23806.05,
@@ -58,6 +59,7 @@
     },
     {
       "name": "Vanguard S&P 500 UCITS ETF",
+      "display_name": "Vanguard S&P 500",
       "ticker": "VUSA.L",
       "units": 406,
       "cost_basis_gbp": 32851.34,
@@ -66,6 +68,7 @@
     },
     {
       "name": "Invesco FTSE All-World ETF Acc GBP",
+      "display_name": "Invesco All-World",
       "ticker": "FWRG.L",
       "units": 4578,
       "cost_basis_gbp": 30000.51,
@@ -74,6 +77,7 @@
     },
     {
       "name": "VanEck Semiconductor UCITS ETF",
+      "display_name": "VanEck Semiconductors",
       "ticker": "SMGB.L",
       "units": 335,
       "cost_basis_gbp": 5994.84,
@@ -82,6 +86,7 @@
     },
     {
       "name": "HSBC MSCI Taiwan Capped ETF",
+      "display_name": "HSBC Taiwan",
       "ticker": "HTWN.L",
       "units": 126,
       "cost_basis_gbp": 10084.85,
@@ -90,6 +95,7 @@
     },
     {
       "name": "iShares £ Ultrashort Bond ETF GBP Dist",
+      "display_name": "iShares Ultrashort",
       "ticker": "ERNS.L",
       "units": 123,
       "cost_basis_gbp": 12422.08,
@@ -98,6 +104,7 @@
     },
     {
       "name": "L&G Battery Value-Chain ETF",
+      "display_name": "L&G Battery Chain",
       "ticker": "BATG.L",
       "units": 383,
       "cost_basis_gbp": 5231.02,
@@ -106,6 +113,7 @@
     },
     {
       "name": "Invesco EQQQ NASDAQ-100 ETF",
+      "display_name": "Invesco Nasdaq-100",
       "ticker": "EQQQ.L",
       "units": 7,
       "cost_basis_gbp": 998.59,
@@ -114,6 +122,7 @@
     },
     {
       "name": "Tritax Big Box REIT",
+      "display_name": "Tritax Big Box",
       "ticker": "BBOX.L",
       "units": 1477,
       "cost_basis_gbp": 2184.95,
@@ -122,6 +131,7 @@
     },
     {
       "name": "Corsair Gaming",
+      "display_name": "Corsair Gaming",
       "ticker": "CRSR",
       "units": 280,
       "cost_basis_gbp": 6977.44,
@@ -130,6 +140,7 @@
     },
     {
       "name": "GameStop Corp",
+      "display_name": "GameStop",
       "ticker": "GME",
       "units": 24,
       "cost_basis_gbp": 1990.96,
