@@ -84,7 +84,12 @@ Output as JSON. Tickers that fail: include with `{ "error": "..." }` and continu
 ## Step 3 — Compute portfolio aggregates
 
 For each holding:
-- `current_value_gbp = units × live_price × FX_if_needed` (use `GBPUSD=X` for USD-priced tickers)
+- `current_value_gbp = units × live_price × adjustment`, using **yfinance's reported `info["currency"]`** (NOT `portfolio.json.currency_native` — yfinance's view can differ, e.g. LSE ETFs often quote in `GBp` pence):
+  - `info["currency"] == "GBP"` → adjustment = 1
+  - `info["currency"] == "GBp"` → adjustment = 1/100 (pence to pounds)
+  - `info["currency"] == "USD"` → adjustment = 1/GBPUSD
+  - Any other currency → log error, mark holding as no-data
+- If `info["currency"]` disagrees with `portfolio.json.currency_native`, **trust yfinance's value for the conversion math** but include a one-line warning in the data-gaps section so the user can investigate (it usually means the ticker is wrong).
 - `weight_pct = current_value_gbp / total_portfolio_gbp × 100`
 - `lifetime_gain_pct = (current_value_gbp - cost_basis_gbp) / cost_basis_gbp × 100`
 
@@ -127,7 +132,7 @@ Flag any of the following:
 
 - A holding moved beyond its **asset-class-scaled threshold** today vs prior close. A flat ±2% is wrong for a bond ETF (where 2% is a credit event) and wrong for a meme stock (where 2% is noise). Use these thresholds:
   - **Ultrashort bond ETF** (`ERNS.L`): ±0.5%
-  - **Broad equity / region ETF** (`VUSA.L`, `FWRG.L`, `EQQQ.L`, `HMCT.L`): ±2%
+  - **Broad equity / region ETF** (`VUSA.L`, `FWRG.L`, `EQQQ.L`, `HTWN.L`): ±2%
   - **Sector / thematic ETF** (`SMGB.L`, `BATG.L`): ±3%
   - **REITs** (`BBOX.L`): ±2%
   - **Established single stocks** (`SHOP`): ±4%

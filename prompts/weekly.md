@@ -58,7 +58,7 @@ Decide which holdings get a deep-dive this week:
   2. Compute `bucket = datetime.date.today().isocalendar().week % 3` in Python (do not use bash `date +%V` — it differs near year boundaries).
   3. Cover small positions whose index in the sorted list `% 3 == bucket`.
   
-  Example: with small positions sorted `[BATG.L, BBOX.L, CRSR, EQQQ.L, ERNS.L, GME, HMCT.L]` (7 items, indices 0-6) and `bucket=1`, the indices `% 3 == 1` are 1 and 4, so cover `BBOX.L` and `ERNS.L`.
+  Example: with small positions sorted `[BATG.L, BBOX.L, CRSR, EQQQ.L, ERNS.L, GME, HTWN.L]` (7 items, indices 0-6) and `bucket=1`, the indices `% 3 == 1` are 1 and 4, so cover `BBOX.L` and `ERNS.L`.
 
 **Hard cap on coverage:** at most **6 holdings covered per weekly run** (always-covered + rotation + wildcard combined). If more qualify, drop the lowest-weight wildcards first.
 - **Wildcard:** any holding with material news this week (earnings, guidance, M&A, regulatory action) jumps in regardless of size or rotation. **Wildcard coverage does NOT consume the rotation slot** — that holding will still appear in its normal rotation cycle next time. Avoid double-coverage in the same week (if a wildcard holding was already in this week's rotation bucket, just cover it once).
@@ -115,11 +115,11 @@ Use **UK REIT vocabulary** (not US REIT terms — no AFFO, no P/B):
 - One paragraph on the UK industrial-property regime + interest-rate environment, with citations
 - Signal: same `cheap / fair / stretched / no opinion` framing
 
-### ETFs (e.g. VUSA, FWRG, SMGB, HMCT, ERNS, BATG, EQQQ)
+### ETFs (e.g. VUSA, FWRG, SMGB, HTWN, ERNS, BATG, EQQQ)
 Use the right index-valuation tool per ETF flavour:
 - **Broad equity (VUSA, FWRG):** CAPE + forward P/E vs 10-yr average.
 - **Sector / thematic (SMGB, BATG):** forward P/E + EV/EBITDA vs the ETF's *own 5-year history* — CAPE is misapplied to thematics.
-- **Single-country (HMCT):** country forward P/E vs MSCI World; **flag TSMC concentration** (~30% of MSCI Taiwan) and TWD-denominated underlying exposure.
+- **Single-country (HTWN):** country forward P/E vs MSCI World; **flag TSMC concentration** (~30% of MSCI Taiwan) and TWD-denominated underlying exposure.
 - **Nasdaq-100 (EQQQ):** forward P/E vs own 10-yr range (CAPE less meaningful given composition shifts).
 - **Ultrashort bond (ERNS):** weighted-average yield, weighted-average maturity, vs BoE base rate and UK 1-yr gilt.
 - For UCITS ETFs, note the spread to iNAV if >25 bps.
