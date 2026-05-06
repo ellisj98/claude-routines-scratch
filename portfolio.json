@@ -1,0 +1,140 @@
+{
+  "_meta": {
+    "schema_version": 1,
+    "currency_display": "GBP",
+    "last_updated": "2026-05-06",
+    "notes": [
+      "cost_basis_gbp values are derived from broker-reported lifetime gain on 2026-05-06.",
+      "Update units AND cost_basis_gbp only when transacting (buy/sell). Live values are computed by the routine."
+    ]
+  },
+  "profile": {
+    "age": 27,
+    "time_horizon_years": "20+",
+    "risk_tolerance": "high; ~35-50% drawdown tolerable",
+    "tax_wrappers": {
+      "isa_pct": 100,
+      "isa_allowance_used_this_year": true,
+      "sipp_status": "unfunded; small dormant pots from prior employment",
+      "gia_pct": 0
+    },
+    "goals": {
+      "primary": "FIRE",
+      "fire_target_gbp": 500000,
+      "secondary_milestone": "£500k portfolio in 5-7 years"
+    },
+    "concentration_cap_pct": 25,
+    "single_stock_cap_pct": 15,
+    "concerns": [
+      "Tech/AI concentration risk acknowledged; portfolio is high-beta and the user is aware"
+    ],
+    "context": {
+      "limited_company_director": true,
+      "ir35_pending_review": true,
+      "sipp_via_employer_contributions_opportunity": true,
+      "uk_based": "Holywell, Wales",
+      "no_dependants": true,
+      "no_debt": true,
+      "no_property": true,
+      "emergency_fund_gbp_approx": 27000
+    },
+    "advice_suppression": {
+      "skip_tax_wrapper_suggestions": "100% ISA — CGT/dividend tax framings are not relevant to this user",
+      "out_of_scope": [
+        "IR35 / SIPP / employer pension structure (briefly tickle in weekly only every ~12 weeks)",
+        "Income protection / critical illness cover",
+        "Anything outside the listed holdings"
+      ]
+    }
+  },
+  "holdings": [
+    {
+      "name": "Shopify Inc",
+      "ticker": "SHOP",
+      "units": 458,
+      "cost_basis_gbp": 23806.05,
+      "currency_native": "USD",
+      "type": "stock"
+    },
+    {
+      "name": "Vanguard S&P 500 UCITS ETF",
+      "ticker": "VUSA.L",
+      "units": 406,
+      "cost_basis_gbp": 32851.34,
+      "currency_native": "GBP",
+      "type": "etf"
+    },
+    {
+      "name": "Invesco FTSE All-World ETF Acc GBP",
+      "ticker": "FWRG.L",
+      "units": 4578,
+      "cost_basis_gbp": 30000.51,
+      "currency_native": "GBP",
+      "type": "etf"
+    },
+    {
+      "name": "VanEck Semiconductor UCITS ETF",
+      "ticker": "SMGB.L",
+      "units": 335,
+      "cost_basis_gbp": 5994.84,
+      "currency_native": "GBP",
+      "type": "etf"
+    },
+    {
+      "name": "HSBC MSCI Taiwan Capped ETF",
+      "ticker": "HMCT.L",
+      "units": 126,
+      "cost_basis_gbp": 10084.85,
+      "currency_native": "GBP",
+      "type": "etf"
+    },
+    {
+      "name": "iShares £ Ultrashort Bond ETF GBP Dist",
+      "ticker": "ERNS.L",
+      "units": 123,
+      "cost_basis_gbp": 12422.08,
+      "currency_native": "GBP",
+      "type": "etf"
+    },
+    {
+      "name": "L&G Battery Value-Chain ETF",
+      "ticker": "BATG.L",
+      "units": 383,
+      "cost_basis_gbp": 5231.02,
+      "currency_native": "GBP",
+      "type": "etf"
+    },
+    {
+      "name": "Invesco EQQQ NASDAQ-100 ETF",
+      "ticker": "EQQQ.L",
+      "units": 7,
+      "cost_basis_gbp": 998.59,
+      "currency_native": "GBP",
+      "type": "etf"
+    },
+    {
+      "name": "Tritax Big Box REIT",
+      "ticker": "BBOX.L",
+      "units": 1477,
+      "cost_basis_gbp": 2184.95,
+      "currency_native": "GBP",
+      "type": "reit"
+    },
+    {
+      "name": "Corsair Gaming",
+      "ticker": "CRSR",
+      "units": 280,
+      "cost_basis_gbp": 6977.44,
+      "currency_native": "USD",
+      "type": "stock"
+    },
+    {
+      "name": "GameStop Corp",
+      "ticker": "GME",
+      "units": 24,
+      "cost_basis_gbp": 1990.96,
+      "currency_native": "USD",
+      "type": "stock"
+    }
+  ]
+}
