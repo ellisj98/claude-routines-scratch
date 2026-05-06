@@ -68,9 +68,11 @@ Also fetch (for the market-feel section):
 
 Output as JSON. Tickers that fail: include with `{ "error": "..." }` and continue. **Never invent values.**
 
-**Freshness check (catches silent stale data):**
-- For each ticker, assert `info["regularMarketTime"]` is within the last 24 hours (72 hours on Mondays for instruments closed over the weekend).
-- If stale, mark that ticker `{"status": "stale", "last_seen": "<timestamp>"}` and treat as no data for that holding.
+**Freshness check (catches silent stale data — graduated, not all-or-nothing):**
+- For each ticker, check `info["regularMarketTime"]`.
+- **≤72 hours stale (≤120 hours on Mondays):** treat as fresh, use price normally.
+- **3–14 days stale:** use the last-known price for live-value computation, but flag the holding line with `(price as of <DD Mon>)`. Concentration math and portfolio total still include the holding so they stay accurate.
+- **>14 days stale:** treat as no data — write `no data` on the holding line and add to the data-gaps note.
 - For the FX rate from frankfurter / open.er-api, parse the response's `date` field. If older than 2 calendar days, treat as failure and try the next source.
 
 **FX fallback ladder (critical for portfolio totals):**
@@ -180,8 +182,10 @@ _Signals only, not financial advice._
 - For moves where rounded result is `±0.0%`, write `flat` instead.
 - £ totals to nearest £100.
 - No 🟢/🔴 per holding — sign is enough.
-- Holding lines: just the % move on a quiet day. Add a 4-6 word context tag only if the holding moved >±1.5%, has news, or hit a 52-week extreme.
-- Inline citations on every news claim in anomalies and tags, e.g. `[ft.com — "headline excerpt"]`.
+- Holding lines: just the % move on a quiet day. Add a **max 6-word** context tag only if the holding moved >±1.5%, has news, or hit a 52-week extreme. **No citations on holding lines** — citations live in *Anomalies* only.
+- The tag is a short descriptive phrase (`"new 52w high"`, `"Q2 outlook miss"`, `"AI capex tailwind"`, `"price as of 30 Apr"` for stale data) — never a sentence, never a headline.
+- **Dedup rule:** if a holding appears in *Anomalies*, the *Holdings* line shows just the % move with no tag. The anomaly already explains why; a tag would duplicate.
+- Inline citations on every news claim in *Anomalies*, e.g. `[ft.com — "headline excerpt"]`.
 
 ### Step 6.5 — Self-QA before sending
 
